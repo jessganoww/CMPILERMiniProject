@@ -1,20 +1,14 @@
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Stack;
 
 public class SimpleCalculator {
-	private CalculatorLexer calculatorLexer;
-	private CalculatorParser calculatorParser;
 	private List<String> expressionList;
 	private int current_expression_index;
 	private boolean isValid = false;
 	
-	public SimpleCalculator(CalculatorLexer lexicalAnalyzer,
-			                CalculatorParser syntaxAnalyzer) {
-		
-		this.calculatorLexer = lexicalAnalyzer;
-		this.calculatorParser = syntaxAnalyzer;
-		
+	public SimpleCalculator() {
 		this.expressionList = new ArrayList<String>();
 		this.current_expression_index = 0;
 	}
@@ -35,21 +29,19 @@ public class SimpleCalculator {
 	 *Flow of solution: LexicalAnalyzer -> SyntaxAnalyzer -> Evaluation.
 	 */
 	public void solve() {
-		//Lexical
-		//Syntax
-
-		//Evaluation
-		System.out.println("TESTING");
-		List<List<String>> test = this.temp_tokenize();
-		System.out.print("Equation: ");
-		int expression_number = 2; // change 'index' to change equation provided by input.txt
-		for(int i = 0; i < test.get(expression_number).size(); i++) {
-			System.out.print(test.get(expression_number).get(i) + " ");
-		}
-		System.out.println();
-		System.out.println("Java's answer: " + (( 10 + 5 ) * 12 - -15 / 4 + 2)); //change dis depending on the equation for evaluation.
 		
-		this.solveExpression(test.get(expression_number));
+		//Traverse all incoming expressions.
+		for(int i = 0; i < this.expressionList.size(); i++) {
+			this.current_expression_index = i;
+			
+			List<String> expTokenList = CalculatorAnalyzer.analyze(this.expressionList.get(i));
+			
+			if(CalculatorAnalyzer.willProceed())
+				this.solveExpression(expTokenList);
+			
+			//restore defaults.
+			CalculatorAnalyzer.reset();
+		}
 	}
 	
 	/**
@@ -145,6 +137,7 @@ public class SimpleCalculator {
 	 */
 	private void evaluate(Stack<String> postFixExpressionStack) {
 		Stack<Integer> resultStack = new Stack<Integer>();
+		boolean proceed = true;
 		
 		String value = "";
 		int num1 = 0;
@@ -174,7 +167,15 @@ public class SimpleCalculator {
 					case "*": result = this.multiply(num2, num1);  
 					          break;
 					          
-					case "/": result = this.divide(num2, num1); 
+					case "/": try {
+							      result = this.divide(num2, num1);
+							  }
+					
+							  //divided by zero
+							  catch(Exception e) {
+								  proceed = false;
+							  }
+						       
 					          break;
 					          
 					case "%": result = this.modulo(num2, num1); 
@@ -187,22 +188,24 @@ public class SimpleCalculator {
 			}
 		}
 		
-		System.out.println("Answer: " + resultStack.peek() );
-		
-	}
-	
-	
-	
-	
-	public void printResults() {
-		
-		if(this.isValid) {
-			
+		if(proceed)
+			this.printAnswer(resultStack.pop());
+		else {
+			this.printErrorEvaluation();
 		}
-		
 	}
 	
-
+	private void printErrorEvaluation()
+	{
+		System.err.println("Evaluation error: Dividing a number by zero at expression#" + (this.current_expression_index+1) +  " is NOT allowed.");
+	}
+	
+	private void printAnswer(int answer) {
+		System.out.println(
+		    (this.current_expression_index + 1) + ") " + this.expressionList.get(this.current_expression_index) + " = " + answer
+		);
+	}
+	
 	
 	private int precedence(String value) {
 		
@@ -244,26 +247,4 @@ public class SimpleCalculator {
 	private boolean checkIfOpenParenthesis(String value) {
 		return value.matches("\\(");
 	}
-	
-	/**
-	 * Temporary tokenizing. do not use on final.
-	 * used for testing.
-	 */
-	private List<List<String>> temp_tokenize() {
-		List<List<String>> temp_exp_list = new ArrayList<List<String>>();
-		
-		for(int i = 0; i < this.expressionList.size(); i++) {
-			List<String> expression = new ArrayList<String>();
-			String[] splitted_expression = this.expressionList.get(i).split(" ");
-			
-			for(int x = 0; x < splitted_expression.length; x++) {
-				expression.add(splitted_expression[x]);
-			}
-			
-			temp_exp_list.add(expression);
-		}
-		
-		return temp_exp_list;
-	}
-
 }
