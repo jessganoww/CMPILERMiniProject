@@ -5,12 +5,11 @@ import java.util.Stack;
 
 public class SimpleCalculator {
 	private List<String> expressionList;
-	private int current_expression_index;
-	private boolean isValid = false;
+	public static int current_expression_index = 0;
 	
 	public SimpleCalculator() {
 		this.expressionList = new ArrayList<String>();
-		this.current_expression_index = 0;
+		current_expression_index = 0;
 	}
 	
 	/**
@@ -32,10 +31,9 @@ public class SimpleCalculator {
 		
 		//Traverse all incoming expressions.
 		for(int i = 0; i < this.expressionList.size(); i++) {
-			this.current_expression_index = i;
+			current_expression_index = i;
 			
 			List<String> expTokenList = CalculatorAnalyzer.analyze(this.expressionList.get(i));
-			
 			if(CalculatorAnalyzer.willProceed())
 				this.solveExpression(expTokenList);
 			
@@ -50,9 +48,12 @@ public class SimpleCalculator {
 	 */
 	private void solveExpression(List<String> expTokenList) {
 		Stack<String> postFixExpressionStack = this.convertToPostFix(expTokenList);
-		this.evaluate(postFixExpressionStack);
+		
+		if(postFixExpressionStack != null)
+			this.evaluate(postFixExpressionStack);
+		else CalculatorAnalyzer.showErrorParenthesis();
 	}
-	
+
 	/**
 	 * Converts infix notation into a postfix notation via the shanting yard algorithm
 	 */
@@ -96,7 +97,13 @@ public class SimpleCalculator {
 				}
 				
 				//pop close parenthesis.
-				operatorStack.pop();
+				if(operatorStack.size() != 0)
+					operatorStack.pop();
+				else {
+					//Unbalanced parenthesis, dont continue.
+					postFixStack = null;
+					break; //get out of loop.
+				}
 			}
 			
 			/* Debugging. 
@@ -123,9 +130,10 @@ public class SimpleCalculator {
 		}
 		
 		//reverse the position so that the orientation for evaluation is fixed.
-		while(operandStack.size() > 0) {
-			postFixStack.push(operandStack.pop());
-		}
+		if(postFixStack != null)
+			while(operandStack.size() > 0) {
+				postFixStack.push(operandStack.pop());
+			}
 		
 		return postFixStack;
 	}
@@ -191,18 +199,13 @@ public class SimpleCalculator {
 		if(proceed)
 			this.printAnswer(resultStack.pop());
 		else {
-			this.printErrorEvaluation();
+			CalculatorAnalyzer.showErrorDivision();
 		}
-	}
-	
-	private void printErrorEvaluation()
-	{
-		System.err.println("Evaluation error: Dividing a number by zero at expression#" + (this.current_expression_index+1) +  " is NOT allowed.");
 	}
 	
 	private void printAnswer(int answer) {
 		System.out.println(
-		    (this.current_expression_index + 1) + ") " + this.expressionList.get(this.current_expression_index) + " = " + answer
+		    (current_expression_index + 1) + ") " + this.expressionList.get(current_expression_index) + " = " + answer
 		);
 	}
 	

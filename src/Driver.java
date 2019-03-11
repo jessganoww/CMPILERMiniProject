@@ -11,6 +11,7 @@ public class Driver {
 		//txt file must be on 'files' folder.
 		calculator.acceptInput("input.txt");
 		calculator.solve();	
+
 	}
 
 }

@@ -1,10 +1,10 @@
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.tree.ParseTree;
 
 public class CalculatorAnalyzer {
 	
@@ -18,12 +18,12 @@ public class CalculatorAnalyzer {
 		
 		//set custom error messages.
 		lexer.removeErrorListeners();
-		lexer.addErrorListener(CalculatorErrorListener.INSTANCE);
+		lexer.addErrorListener(CalculatorLexerErrorListener.INSTANCE);
 		
 		parser.removeErrorListeners();
-		parser.addErrorListener(CalculatorErrorListener.INSTANCE);
+		parser.addErrorListener(CalculatorParserErrorListener.INSTANCE);
 		
-		ParseTree tree = parser.startRule();
+		parser.startRule();
 		
 		List<String> expTokenString = new ArrayList<String>();
 		
@@ -47,5 +47,28 @@ public class CalculatorAnalyzer {
 	public static void reset() {
 		// TODO Auto-generated method stub
 		proceed = true;
+	}
+	
+	public static void showErrorDivision() {
+		int realLineNumber = 1+SimpleCalculator.current_expression_index;
+		System.err.println("DIVISION ERROR: cannot divide by zero at line: " + realLineNumber + ".");
+	}
+	
+	public static void showErrorParenthesis() {
+		int realLineNumber = 1+SimpleCalculator.current_expression_index;
+		System.err.println("PARENTHESIS ERROR: missing pair of parenthesis at line: " + realLineNumber + ".");
+	}
+	
+	public static void showErrorLexer(String msg, int line, int charPositionInLine) {
+		int realLineNumber = line+SimpleCalculator.current_expression_index;
+		
+		System.err.println("LEXICAL ERROR: " + msg + "| Line: " + realLineNumber + 
+	                       " character position: " + charPositionInLine);
+	}
+	
+	public static void showErrorParser(String msg, int line, int charPositionInLine) {
+		int realLineNumber = line+SimpleCalculator.current_expression_index;
+		
+		System.err.println("SYNTAX ERROR at Line: " + realLineNumber + " character position: " + charPositionInLine + "| " + msg);
 	}
 }
