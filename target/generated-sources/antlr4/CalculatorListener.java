@@ -1,4 +1,5 @@
-// Generated from Calculator.g4 by ANTLR 4.7.2
+// Generated from Calculator.g4 by ANTLR 4.4
+import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -7,63 +8,63 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface CalculatorListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link CalculatorParser#startRule}.
-	 * @param ctx the parse tree
-	 */
-	void enterStartRule(CalculatorParser.StartRuleContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CalculatorParser#startRule}.
-	 * @param ctx the parse tree
-	 */
-	void exitStartRule(CalculatorParser.StartRuleContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CalculatorParser#operation1}.
-	 * @param ctx the parse tree
-	 */
-	void enterOperation1(CalculatorParser.Operation1Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link CalculatorParser#operation1}.
-	 * @param ctx the parse tree
-	 */
-	void exitOperation1(CalculatorParser.Operation1Context ctx);
-	/**
-	 * Enter a parse tree produced by {@link CalculatorParser#operation2}.
-	 * @param ctx the parse tree
-	 */
-	void enterOperation2(CalculatorParser.Operation2Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link CalculatorParser#operation2}.
-	 * @param ctx the parse tree
-	 */
-	void exitOperation2(CalculatorParser.Operation2Context ctx);
-	/**
-	 * Enter a parse tree produced by {@link CalculatorParser#addOrMinus}.
-	 * @param ctx the parse tree
-	 */
-	void enterAddOrMinus(CalculatorParser.AddOrMinusContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CalculatorParser#addOrMinus}.
-	 * @param ctx the parse tree
-	 */
-	void exitAddOrMinus(CalculatorParser.AddOrMinusContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CalculatorParser#multDivOrMod}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultDivOrMod(CalculatorParser.MultDivOrModContext ctx);
+	void enterMultDivOrMod(@NotNull CalculatorParser.MultDivOrModContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link CalculatorParser#multDivOrMod}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultDivOrMod(CalculatorParser.MultDivOrModContext ctx);
+	void exitMultDivOrMod(@NotNull CalculatorParser.MultDivOrModContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CalculatorParser#expression}.
+	 * Enter a parse tree produced by {@link CalculatorParser#addSubExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression(CalculatorParser.ExpressionContext ctx);
+	void enterAddSubExpression(@NotNull CalculatorParser.AddSubExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CalculatorParser#expression}.
+	 * Exit a parse tree produced by {@link CalculatorParser#addSubExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression(CalculatorParser.ExpressionContext ctx);
+	void exitAddSubExpression(@NotNull CalculatorParser.AddSubExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#mdmExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterMdmExpression(@NotNull CalculatorParser.MdmExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#mdmExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitMdmExpression(@NotNull CalculatorParser.MdmExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#plusOrMinus}.
+	 * @param ctx the parse tree
+	 */
+	void enterPlusOrMinus(@NotNull CalculatorParser.PlusOrMinusContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#plusOrMinus}.
+	 * @param ctx the parse tree
+	 */
+	void exitPlusOrMinus(@NotNull CalculatorParser.PlusOrMinusContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#startRule}.
+	 * @param ctx the parse tree
+	 */
+	void enterStartRule(@NotNull CalculatorParser.StartRuleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#startRule}.
+	 * @param ctx the parse tree
+	 */
+	void exitStartRule(@NotNull CalculatorParser.StartRuleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#term}.
+	 * @param ctx the parse tree
+	 */
+	void enterTerm(@NotNull CalculatorParser.TermContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#term}.
+	 * @param ctx the parse tree
+	 */
+	void exitTerm(@NotNull CalculatorParser.TermContext ctx);
 }

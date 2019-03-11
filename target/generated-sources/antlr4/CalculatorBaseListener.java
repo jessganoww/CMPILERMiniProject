@@ -1,6 +1,7 @@
-// Generated from Calculator.g4 by ANTLR 4.7.2
+// Generated from Calculator.g4 by ANTLR 4.4
 
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -15,96 +16,96 @@ public class CalculatorBaseListener implements CalculatorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStartRule(CalculatorParser.StartRuleContext ctx) { }
+	@Override public void enterMultDivOrMod(@NotNull CalculatorParser.MultDivOrModContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStartRule(CalculatorParser.StartRuleContext ctx) { }
+	@Override public void exitMultDivOrMod(@NotNull CalculatorParser.MultDivOrModContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOperation1(CalculatorParser.Operation1Context ctx) { }
+	@Override public void enterAddSubExpression(@NotNull CalculatorParser.AddSubExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOperation1(CalculatorParser.Operation1Context ctx) { }
+	@Override public void exitAddSubExpression(@NotNull CalculatorParser.AddSubExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOperation2(CalculatorParser.Operation2Context ctx) { }
+	@Override public void enterMdmExpression(@NotNull CalculatorParser.MdmExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOperation2(CalculatorParser.Operation2Context ctx) { }
+	@Override public void exitMdmExpression(@NotNull CalculatorParser.MdmExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAddOrMinus(CalculatorParser.AddOrMinusContext ctx) { }
+	@Override public void enterPlusOrMinus(@NotNull CalculatorParser.PlusOrMinusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAddOrMinus(CalculatorParser.AddOrMinusContext ctx) { }
+	@Override public void exitPlusOrMinus(@NotNull CalculatorParser.PlusOrMinusContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMultDivOrMod(CalculatorParser.MultDivOrModContext ctx) { }
+	@Override public void enterStartRule(@NotNull CalculatorParser.StartRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMultDivOrMod(CalculatorParser.MultDivOrModContext ctx) { }
+	@Override public void exitStartRule(@NotNull CalculatorParser.StartRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression(CalculatorParser.ExpressionContext ctx) { }
+	@Override public void enterTerm(@NotNull CalculatorParser.TermContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression(CalculatorParser.ExpressionContext ctx) { }
+	@Override public void exitTerm(@NotNull CalculatorParser.TermContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEveryRule(ParserRuleContext ctx) { }
+	@Override public void enterEveryRule(@NotNull ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEveryRule(ParserRuleContext ctx) { }
+	@Override public void exitEveryRule(@NotNull ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitTerminal(TerminalNode node) { }
+	@Override public void visitTerminal(@NotNull TerminalNode node) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitErrorNode(ErrorNode node) { }
+	@Override public void visitErrorNode(@NotNull ErrorNode node) { }
 }
