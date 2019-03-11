@@ -1,10 +1,11 @@
 grammar Calculator;
 
-startRule: operation+;
+startRule: operation1+;
 
-operation: operation addOrMinus operation
-          | operation multDivOrMod operation
-          | LBRACKET operation RBRACKET
+operation1: operation2 addOrMinus operation1 | operation2;
+
+operation2: expression multDivOrMod operation2
+          | LBRACKET operation1 RBRACKET multDivOrMod operation2
           | expression;
 
 

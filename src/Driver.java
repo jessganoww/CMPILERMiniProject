@@ -1,3 +1,5 @@
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 
 public class Driver {
 	public static void main(String[] args) {
@@ -9,6 +11,8 @@ public class Driver {
 		calculator.acceptInput("input.txt");
 		calculator.solve();
 		//calculator.printResults();
+		
+		CalculatorLexer lexer = new CalculatorLexer(CharStreams.fromString("ano"));
 	}
 
 }
