@@ -145,61 +145,89 @@ public class SimpleCalculator {
 	 */
 	private void evaluate(Stack<String> postFixExpressionStack) {
 		Stack<Integer> resultStack = new Stack<Integer>();
-		boolean proceed = true;
+		boolean followsDivisionRule = true;
+		boolean followsOperatorCount = true;
 		
 		String value = "";
 		int num1 = 0;
 		int num2 = 0;
 		int result = 0;
 		
-		while(postFixExpressionStack.size() > 0) {
+		//check for missing operator.
+		int operandCount = 0;
+		int operatorCount = 0;
+		String[] testExpression = this.expressionList.get(current_expression_index).split("[\" \"]+");
+		
+		for(int i = 0; i < testExpression.length; i++) {
 			
-			if(this.checkIfOperand(postFixExpressionStack.peek())) {
-				resultStack.push(this.convertStringToInt(postFixExpressionStack.pop()));
+			if(this.checkIfOperator(testExpression[i]) ) {
+				operatorCount++;
 			}
 			
-			else {
-				
-				num1 = resultStack.pop();
-				num2 = resultStack.pop();
-				value = postFixExpressionStack.pop();
-				//top of stack must be at left of operator
-				//while next to top is at the right of operator
-				switch(value) {
-					case "+": result = this.add(num2, num1); 
-							  break;
-							  
-					case "-": result = this.subtract(num2, num1); 
-					          break;
-					          
-					case "*": result = this.multiply(num2, num1);  
-					          break;
-					          
-					case "/": try {
-							      result = this.divide(num2, num1);
-							  }
-					
-							  //divided by zero
-							  catch(Exception e) {
-								  proceed = false;
-							  }
-						       
-					          break;
-					          
-					case "%": result = this.modulo(num2, num1); 
-					          break;
-					          
-					default: System.out.println("HELP ME");
-				}
-				
-				resultStack.push(result);
+			else if(testExpression[i].matches("\\(?-?([0-9])+\\)?")) {
+				operandCount++;
 			}
 		}
 		
-		if(proceed)
+		if(operatorCount == operandCount-1) {
+			while(postFixExpressionStack.size() > 0) {
+				
+				if(this.checkIfOperand(postFixExpressionStack.peek())) {
+					resultStack.push(this.convertStringToInt(postFixExpressionStack.pop()));
+				}
+				
+				else {
+					
+					num1 = resultStack.pop();
+					num2 = resultStack.pop();
+					value = postFixExpressionStack.pop();
+					//top of stack must be at left of operator
+					//while next to top is at the right of operator
+					switch(value) {
+						case "+": result = this.add(num2, num1); 
+								  break;
+								  
+						case "-": result = this.subtract(num2, num1); 
+						          break;
+						          
+						case "*": result = this.multiply(num2, num1);  
+						          break;
+						          
+						case "/": try {
+								      result = this.divide(num2, num1);
+								  }
+						
+								  //divided by zero
+								  catch(Exception e) {
+									  followsDivisionRule = false;
+								  }
+							       
+						          break;
+						          
+						case "%": result = this.modulo(num2, num1); 
+						          break;
+						          
+						default: System.out.println("HELP ME");
+					}
+					
+					resultStack.push(result);
+				}
+			}
+		}
+		//does not follow operator count.
+		else {
+			followsOperatorCount = false;
+		}
+		
+		if(followsDivisionRule && followsOperatorCount)
 			this.printAnswer(resultStack.pop());
 		else {
-			CalculatorAnalyzer.showErrorDivision();
+			
+			if(!followsDivisionRule)
+				CalculatorAnalyzer.showErrorDivision();
+			
+			if(!followsOperatorCount)
+				CalculatorAnalyzer.showErrorOperatorCount();
 		}
 	}
 	

@@ -51,24 +51,30 @@ public class CalculatorAnalyzer {
 	
 	public static void showErrorDivision() {
 		int realLineNumber = 1+SimpleCalculator.current_expression_index;
-		System.err.println("DIVISION ERROR: cannot divide by zero at line: " + realLineNumber + ".");
+		System.err.println("EVALUATION ERROR: cannot divide by zero at line: " + realLineNumber + ".");
 	}
 	
 	public static void showErrorParenthesis() {
 		int realLineNumber = 1+SimpleCalculator.current_expression_index;
-		System.err.println("PARENTHESIS ERROR: missing pair of parenthesis at line: " + realLineNumber + ".");
+		System.err.println("SYNTAX ERROR at line: " + realLineNumber + "| Missing pair of parenthesis.");
 	}
 	
 	public static void showErrorLexer(String msg, int line, int charPositionInLine) {
 		int realLineNumber = line+SimpleCalculator.current_expression_index;
-		
-		System.err.println("LEXICAL ERROR: " + msg + "| Line: " + realLineNumber + 
-	                       " character position: " + charPositionInLine);
+		int realCharPos = charPositionInLine+1;
+		System.err.println("LEXICAL ERROR at line: " + realLineNumber + 
+	                       " character position: " + realCharPos + "|" + msg + ".");
 	}
 	
 	public static void showErrorParser(String msg, int line, int charPositionInLine) {
 		int realLineNumber = line+SimpleCalculator.current_expression_index;
 		
-		System.err.println("SYNTAX ERROR at Line: " + realLineNumber + " character position: " + charPositionInLine + "| " + msg);
+		System.err.println("SYNTAX ERROR at Line: " + realLineNumber + " character position: " + charPositionInLine + "| " + msg  + ".");
+	}
+
+	public static void showErrorOperatorCount() {
+		int realLineNumber = 1+SimpleCalculator.current_expression_index;
+		System.err.println("SYNTAX ERROR at line: " + realLineNumber + "| Invalid arithmetic expression with lacking operator/s.");
+		
 	}
 }

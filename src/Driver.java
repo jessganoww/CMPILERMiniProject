@@ -12,6 +12,7 @@ public class Driver {
 		calculator.acceptInput("input.txt");
 		calculator.solve();	
 
+
 	}
 
 }
